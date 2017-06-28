@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/
+extras/spring-security">
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+<p sec:authorize="isAuthenticated()">
+<form th:action="@{/logout}" method="post">
+<input type="submit" value="Sign Out"/>
+</form>
+</p>
+
+This Is Home page
+
+</body>
+</html>

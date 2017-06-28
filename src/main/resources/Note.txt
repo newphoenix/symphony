@@ -1,0 +1,15 @@
+mvn clean install
+
+docker images
+
+# build image if does not exist
+docker build -f DockerFile -t secapp
+
+# run spring boot app
+docker run -p 8080:8080 secapp .
+
+# List info
+docker ps -a
+
+# can't stop by name on windows. Why  don't know
+docker stop <Container_ID>
