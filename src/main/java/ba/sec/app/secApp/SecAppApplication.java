@@ -27,7 +27,7 @@ public class SecAppApplication {
 	}
 	
 	
-    @Bean(name = "dataSource}")
+    @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName(driver);

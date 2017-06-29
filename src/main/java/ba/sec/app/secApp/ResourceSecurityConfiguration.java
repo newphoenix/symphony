@@ -10,8 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@EnableWebSecurity
-public class ResourceSecurityConfiguration   extends WebSecurityConfigurerAdapter{
+//@EnableWebSecurity
+public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	 @Autowired
 	 DataSource dataSource;
@@ -19,9 +19,10 @@ public class ResourceSecurityConfiguration   extends WebSecurityConfigurerAdapte
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	http.authorizeRequests()
+	.antMatchers("/resources/**").permitAll()
 	.antMatchers("/**").authenticated()
 	.and()
-	.formLogin().loginPage("/login").permitAll()
+	.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
 	.and()
 	.logout().permitAll();
 	}
