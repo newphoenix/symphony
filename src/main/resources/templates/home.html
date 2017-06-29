@@ -2,14 +2,30 @@
 <html lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/
 extras/spring-security">
 <head>
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Home Page</title>
 </head>
 <body>
-<p sec:authorize="isAuthenticated()">
-<form th:action="@{/logout}" method="post">
-<input type="submit" value="Sign Out"/>
-</form>
-</p>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
+      <li><p sec:authorize="isAuthenticated()">
+          <form th:action="@{/logout}" method="post">
+           <input type="submit" value="Sign Out" class="btn btn-primary"/>
+            </form>
+</p></li>
+    </ul>
+  </div>
+</nav>
 
 This Is Home page
 
