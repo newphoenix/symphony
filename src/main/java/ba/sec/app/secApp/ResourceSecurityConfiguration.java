@@ -19,6 +19,7 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 	http.csrf().disable().authorizeRequests()	
 	.antMatchers("/resources/**").permitAll()
+	.antMatchers("/abc/**").permitAll()
 	.antMatchers("/**").authenticated()
 	.and()
 	.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
