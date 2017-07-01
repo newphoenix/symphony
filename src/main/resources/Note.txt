@@ -3,13 +3,39 @@ mvn clean install
 docker images
 
 # build image if does not exist
-docker build -f DockerFile -t secapp
+docker build -f DockerFile -t secapp .
 
 # run spring boot app
-docker run -p 8080:8080 secapp .
+docker run -p 8080:8080 --rm=true --name=springboot secapp .
 
 # List info
 docker ps -a
 
 # can't stop by name on windows. Why  don't know
 docker stop <Container_ID>
+
+#EACH time updates the application needs to 
+
+$ mvn clean install
+$ docker build -f DockerFile -t secapp .
+$ docker run -p 8080:8080 -t -rm=true --name=springboot secapp .
+
+OR For hot deployment
+add
+<configuration>
+      <excludeDevtools>false</excludeDevtools>
+</configuration>
+To spring-boot-maven-plugin in pom.xml 
+<plugin>
+	<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-maven-plugin</artifactId>
+		<configuration>
+           <excludeDevtools>false</excludeDevtools>
+        </configuration>
+</plugin>
+
+Select Run Configurations…​ from the Run menu.
+Create a new Java Application “launch configuration”.
+Browse for the secApp project.
+Use org.springframework.boot.devtools.RemoteSpringApplication as the main class.
+Add http://localhost:8080 to the Program arguments (or whatever your remote URL is).

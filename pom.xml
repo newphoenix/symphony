@@ -67,7 +67,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
+			<artifactId>spring-boot-devtools</artifactId>			
 		</dependency>
 	</dependencies>
 
@@ -76,6 +76,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				  <configuration>
+                	<excludeDevtools>false</excludeDevtools>
+          		  </configuration>
 			</plugin>
 		</plugins>
 		<finalName>secApp</finalName>

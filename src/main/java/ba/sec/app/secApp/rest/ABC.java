@@ -1,6 +1,7 @@
 package ba.sec.app.secApp.rest;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,5 +22,19 @@ public class ABC {
         
         return "ok";
 	}
-
+	
+	
+	@GetMapping(value="/string")
+	public String getString() {
+        
+        return "ok";
+	}
+	
+	
+	@GetMapping(value="/str")
+	public String getStr() {
+        
+        return "okxy";
+	}
+	
 }
