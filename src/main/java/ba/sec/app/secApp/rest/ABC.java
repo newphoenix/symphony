@@ -34,7 +34,7 @@ public class ABC {
 	@GetMapping(value="/str")
 	public String getStr() {
         
-        return "okxy";
+        return "okxyz";
 	}
 	
 }
