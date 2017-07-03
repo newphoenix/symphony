@@ -36,7 +36,7 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter{
      .usersByUsernameQuery(
       "select email, concat(SUBSTRING(PASSWORD,33,32),SUBSTRING(PASSWORD,97,32)) as password, enabled from user where email=?")
      .authoritiesByUsernameQuery(
-      "select email,role from authority where email=?");
+      "select email,authority from authority where email=?");
     } 
 
 }
