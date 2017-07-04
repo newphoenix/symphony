@@ -21,5 +21,10 @@ public class HomeController {
 	public String userPage(){
 		return "user";
 	}
+	
+	@GetMapping("person")
+	public String personPage(){
+		return "person";
+	}
 
 }

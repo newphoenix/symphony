@@ -39,3 +39,21 @@ Create a new Java Application “launch configuration”.
 Browse for the secApp project.
 Use org.springframework.boot.devtools.RemoteSpringApplication as the main class.
 Add http://localhost:8080 to the Program arguments (or whatever your remote URL is).
+
+
+
+
+
+
+@Component
+public class DateUtilToDateSQLConverter implements Converter<java.util.Date, Date> {
+
+    @Override
+    public Date convert(java.util.Date source) {
+        return new Date(source.getTime());
+    }
+}
+
+
+http://www.codejava.net/frameworks/spring/spring-mvc-form-validation-example-with-bean-validation-api
+http://www.journaldev.com/2668/spring-validation-example-mvc-validator
