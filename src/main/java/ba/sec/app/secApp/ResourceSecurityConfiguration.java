@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,6 +21,7 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	http.csrf().disable().authorizeRequests()	
 	.antMatchers("/resources/**").permitAll()
 	.antMatchers("/abc/**").permitAll()
+	.antMatchers("/register/**").permitAll()
 	.antMatchers("/**").authenticated()
 	.and()
 	.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
@@ -27,6 +29,20 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	.logout().permitAll();
 	}
 	
+//	@Configuration
+//	@Order(1)
+//	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+//		
+//		@Override
+//         protected void configure(HttpSecurity http) throws Exception {
+//                 
+//             http.csrf().disable()
+//             .authorizeRequests()            
+//             .antMatchers("/user/**").authenticated()
+//             .and()
+//             .httpBasic();
+//         }
+//     }
    
 
     

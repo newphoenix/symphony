@@ -1,6 +1,7 @@
 package ba.sec.app.secApp.dao;
 // Generated Jul 3, 2017 10:18:42 PM by Hibernate Tools 4.3.1.Final
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import ba.sec.app.secApp.modelx.User;
+import ba.sec.app.secApp.rest.Constants;
 
 /**
  * Home object for domain model class User.
@@ -82,5 +84,18 @@ public class UserHome {
 			log.error("error getAllUsers  ",re);
 		}
 		return users;
+	}
+
+	public String checkEmailExists(String email) {
+		String result = Constants.NOK;
+		try {
+			BigInteger r =  (BigInteger) entityManager.createNativeQuery("SELECT EXISTS (SELECT 1 FROM( SELECT email FROM user u) a WHERE a.email = :email)")
+		              .setParameter("email", email).getSingleResult();
+			result = (r.intValue()==1)? Constants.Email_DOES_EXISTS: Constants.NOK;
+	} catch (Exception re) {		
+		log.error("checkIfEmailExistsInTwoTables failed", re);	
+	}
+	
+		return result;
 	}
 }

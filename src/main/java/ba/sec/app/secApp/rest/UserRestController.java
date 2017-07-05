@@ -38,6 +38,8 @@ public class UserRestController {
 	}
 	
 	
+	//echo {"firstName":"ax","lastName":"bx","age":18} | http -a alaa@gmail.com:1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014 :8080/user/save
+	
 	@PostMapping(value="/save",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String saveUser(@RequestBody User user) {
 

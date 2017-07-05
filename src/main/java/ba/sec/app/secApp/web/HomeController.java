@@ -20,6 +20,11 @@ public class HomeController {
 	@GetMapping("user")
 	public String userPage(){
 		return "user";
+	}	
+	
+	@GetMapping("register")
+	public String register(){
+		return "register";
 	}
 	
 	@GetMapping("person")

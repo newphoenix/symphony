@@ -8,4 +8,7 @@ public interface IUserService {
 
 	
 	public List<User> getAllUsers();
+
+	public String register(User user);
+
 }

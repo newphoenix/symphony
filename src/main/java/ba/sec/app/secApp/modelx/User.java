@@ -3,12 +3,11 @@ package ba.sec.app.secApp.modelx;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,33 +20,40 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "user", catalog = "rest_db", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User implements java.io.Serializable {
 
-
-	private static final long serialVersionUID = 8337811032501673270L;
+	private static final long serialVersionUID = 2844640291242640638L;
 	
 	private Integer id;
 	private String email;
 	private String password;
+	private String firstname;
+	private String lastname;
 	private boolean enabled;
 	private Set<Authority> authorities = new HashSet<Authority>(0);
 
 	public User() {
 	}
 
-	public User(String email, String password, boolean enabled) {
+	public User(String email, String password, String firstname, String lastname, boolean enabled) {
 		this.email = email;
 		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.enabled = enabled;
 	}
 
-	public User(String email, String password, boolean enabled, Set<Authority> authorities) {
+	public User(String email, String password, String firstname, String lastname, boolean enabled,
+			Set<Authority> authorities) {
 		this.email = email;
 		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.enabled = enabled;
 		this.authorities = authorities;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
+
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -73,6 +79,24 @@ public class User implements java.io.Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Column(name = "firstname", nullable = false)
+	public String getFirstname() {
+		return this.firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	@Column(name = "lastname", nullable = false)
+	public String getLastname() {
+		return this.lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	@Column(name = "enabled", nullable = false)
