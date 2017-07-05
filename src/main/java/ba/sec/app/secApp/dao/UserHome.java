@@ -98,4 +98,16 @@ public class UserHome {
 	
 		return result;
 	}
+
+	public User findByEmail(String email) {
+		User result = null;
+		try {
+			result =  (User) entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email").setParameter("email", email).getSingleResult();
+	
+	} catch (Exception re) {		
+		log.error("checkIfEmailExistsInTwoTables failed", re);	
+	}
+		
+		return result;
+	}
 }
