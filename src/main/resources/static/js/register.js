@@ -14,11 +14,14 @@ function doRegister(){
             dataType : 'json',
             contentType:"application/json; charset=utf-8",	   
             data : JSON.stringify(formData),
-            success : function(data) {				
-				if(data.result == 'ok'){
-					$("#error").hide();
+            success : function(data) {	
+            	$("#error").empty().hide();
+				if(data.msg == 'ok'){					
 					window.location='/login';					
-				}else{
+				}else if(data.msg == 'nok'){
+					displayError(data.result);
+				}
+				else{
 					displayError("Registration not successful");
 				}
 			},

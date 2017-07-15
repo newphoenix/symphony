@@ -1,3 +1,9 @@
+1. login /register (register validation)
+2. add links with tags 
+3. handle same links (added)
+4. suggestion (added)
+5. ???
+
 mvn clean install
 
 docker images

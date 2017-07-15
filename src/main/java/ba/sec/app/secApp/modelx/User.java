@@ -15,6 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 @Table(name = "user", catalog = "rest_db2", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -26,9 +30,18 @@ public class User implements java.io.Serializable {
 	private static final long serialVersionUID = -5573824329871407153L;
 	
 	private Integer id;
+	
+	@NotBlank(message="Email is required")
+	@Email(message="Please enter correct email address")
 	private String email;
+	
+	@NotBlank(message="Password is requied")
 	private String password;
+	
+	@NotBlank(message="FirstName is required")
 	private String firstname;
+	
+	@NotBlank(message="LastName is requied")
 	private String lastname;
 	private boolean enabled;
 	private Set<Link> links = new HashSet<Link>(0);

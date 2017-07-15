@@ -37,7 +37,7 @@ public class UserService implements IUserService {
 	//@Transactional(rollbackFor = Exception.class, readOnly = false, timeout = 30, propagation = Propagation.SUPPORTS, isolation = Isolation.DEFAULT)
 	public String register(User user){
 	    
-		String result = Constants.NOK;
+		String result = Constants.NOK_;
 		try{
 			
 			if(Constants.Email_DOES_EXISTS.equals(userDao.checkEmailExists(user.getEmail()))){
@@ -62,7 +62,7 @@ public class UserService implements IUserService {
 			userDao.persist(user);
 			authorityDao.persist(auth);
 			
-			result = Constants.OK;
+			result = Constants.OK_;
 			
 			
 		}catch(Exception ex){
