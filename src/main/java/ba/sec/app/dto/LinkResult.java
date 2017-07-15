@@ -1,4 +1,4 @@
-package ba.sec.app.secApp.rest;
+package ba.sec.app.dto;
 
 import java.io.Serializable;
 import java.util.List;

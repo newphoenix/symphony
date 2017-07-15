@@ -4,7 +4,6 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,37 +19,20 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 	http.csrf().disable().authorizeRequests()	
 	.antMatchers("/resources/**").permitAll()
-	.antMatchers("/abc/**").permitAll()
 	.antMatchers("/register/**").permitAll()
 	.antMatchers("/**").authenticated()
 	.and()
 	.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
 	.and()
 	.logout().permitAll();
+	
 	}
 	
-//	@Configuration
-//	@Order(1)
-//	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-//		
-//		@Override
-//         protected void configure(HttpSecurity http) throws Exception {
-//                 
-//             http.csrf().disable()
-//             .authorizeRequests()            
-//             .antMatchers("/user/**").authenticated()
-//             .and()
-//             .httpBasic();
-//         }
-//     }
-   
-
-    
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
       auth.jdbcAuthentication().dataSource(dataSource)
      .usersByUsernameQuery(
-      "select email, concat(SUBSTRING(PASSWORD,33,32),SUBSTRING(PASSWORD,97,32)) as password, enabled from user where email=?")
+      "select email, password, enabled from user where email=?")
      .authoritiesByUsernameQuery(
       "select email,authority from authority where email=?");
     } 

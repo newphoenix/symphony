@@ -11,8 +11,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
+import ba.sec.app.constants.Constants;
 import ba.sec.app.secApp.modelx.User;
-import ba.sec.app.secApp.rest.Constants;
 
 /**
  * Home object for domain model class User.

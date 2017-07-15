@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ba.sec.app.constants.Constants;
+import ba.sec.app.dto.LinkResult;
+import ba.sec.app.dto.TagResult;
 import ba.sec.app.secApp.modelx.Link;
 import ba.sec.app.secApp.service.ILinkService;
+import ba.sec.app.urlUtils.LinkUtils;
 
 @RestController
 @RequestMapping("link")
@@ -24,13 +30,25 @@ public class LinkRestController {
 	ILinkService linkService;
 
 	@PostMapping(value="/save",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String saveUser(@RequestBody Link link,Principal princ) {
+	public ResponseEntity<?> saveUrl(@RequestBody Link link,Principal princ) {
+		
+		String url = link.getLink();
+		int andNumber = LinkUtils.countChars(url, Constants.AND);
+		String param1 = LinkUtils.paramsInUrl(url);
+		List<String> paramLst1 = LinkUtils.splitParams(param1);
+		
+		String url2 = LinkUtils.checkAndChop(url);
 
-        System.out.println("-- "+link);
-        System.out.println("-- "+princ.getName());
-        String result = linkService.addLink(link,princ.getName());
+		List<String> userLinks = linkService.getUserLinks(url2,princ.getName());
+		
+		String result = Constants.LINK_EXIST;
+		HttpStatus httpStatus = HttpStatus.OK; 
+		
+       if(!LinkUtils.checkLinkExist(userLinks,andNumber,paramLst1,url))	{	
+          result = linkService.addLink(link,princ.getName());         
+       }
         
-        return result;
+        return ResponseEntity.status(httpStatus).body(result);
 	}
 	
 	@GetMapping(value="/getAll",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)

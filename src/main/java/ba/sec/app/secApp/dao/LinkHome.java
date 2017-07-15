@@ -2,7 +2,6 @@ package ba.sec.app.secApp.dao;
 // Generated Jul 5, 2017 1:57:06 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,6 +21,8 @@ import ba.sec.app.secApp.modelx.Link;
 public class LinkHome {
 
 	private static final Log log = LogFactory.getLog(LinkHome.class);
+	
+	private static String PERCENTAGE = "%";
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -100,6 +101,20 @@ public class LinkHome {
 
 		return result;
 
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<String> getLinksSimilarToURL2(String url2, Integer id) {
+		List<String> result = null;
+		try {
+			result = (List<String>) entityManager.createNativeQuery("SELECT link from link where link like :link AND user_id = :id")
+					.setParameter("link", PERCENTAGE+url2+PERCENTAGE).setParameter("id", id).getResultList();
+
+		} catch (Exception re) {
+			log.error("getLinksSimilarToURL2 failed", re);
+		}
+
+		return result;
 	}
 	
 }

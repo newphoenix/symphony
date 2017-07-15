@@ -2,10 +2,8 @@ function doRegister(){
         
 	    var form = $('#registerForm');     
         var formData = {}
-        
-        hashPassword('password');
-	 
-         $.each(form.serializeArray(),function(){
+ 	 
+        $.each(form.serializeArray(),function(){
 	      formData[this.name] = this.value;	      
         });
          
@@ -24,9 +22,7 @@ function doRegister(){
 					displayError("Registration not successful");
 				}
 			},
-			error : function() {
-				console.log("error");
-				//$("#error").empty().append(JSON.parse(data.responseText).messages.join("\n"));
+			error : function() {								
 				displayError("error with server connection");
 			}
          });

@@ -6,12 +6,6 @@ $(document).ready(function(){
 });
 
 
-function hashPassword(id) {
-		var hashx = sha256_digest($("#"+id).val());
-		$("#"+id).val(hashx);
-	}
-
-
 function addLink(){
 	
     var form = $('#linkForm');     
@@ -28,9 +22,10 @@ function addLink(){
         dataType : 'json',
         contentType:"application/json; charset=utf-8",	   
         data : JSON.stringify(formData),
-        success : function(data) {				
+        success : function(data) {
+        	$("#error").empty().hide();	
 			if(data.result == 'ok'){
-				$("#error").hide();	
+				
 				
 				var link = $("#link").val();
 				var tag = $("#tag").val();
@@ -40,8 +35,10 @@ function addLink(){
 				
 				appendToLinkTable(link,tag);
 				
+			}else if(data.result == "exists"){
+				displayError("Link already exists");
 			}else{
-				displayError("Add Link not successful");
+				displayError("Didn't add link");
 			}
 		},
 		error : function() {

@@ -16,20 +16,12 @@ public class HomeController {
 	public String login(){
 		return "login";
 	}
-
-	@GetMapping("user")
-	public String userPage(){
-		return "user";
-	}	
 	
 	@GetMapping("register")
 	public String register(){
 		return "register";
 	}
 	
-	@GetMapping("person")
-	public String personPage(){
-		return "person";
-	}
+
 
 }

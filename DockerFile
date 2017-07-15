@@ -1,4 +1,0 @@
-FROM java:8
-EXPOSE 8080
-ADD target/secApp.jar secApp.jar
-ENTRYPOINT ["java","-jar","secApp.jar"]

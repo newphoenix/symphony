@@ -17,7 +17,7 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "user", catalog = "rest_db", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "user", catalog = "rest_db2", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User implements java.io.Serializable {
 
 	/**

@@ -8,13 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ba.sec.app.constants.Constants;
 import ba.sec.app.secApp.dao.AuthorityHome;
 import ba.sec.app.secApp.dao.UserHome;
 import ba.sec.app.secApp.modelx.Authority;
 import ba.sec.app.secApp.modelx.AuthorityId;
 import ba.sec.app.secApp.modelx.User;
-import ba.sec.app.secApp.rest.BasicService;
-import ba.sec.app.secApp.rest.Constants;
 
 @Service("userService")
 @Transactional
@@ -44,9 +43,8 @@ public class UserService implements IUserService {
 			if(Constants.Email_DOES_EXISTS.equals(userDao.checkEmailExists(user.getEmail()))){
 				return result;
 			}
-			
-			String hashedPass = BasicService.hashPassword(user.getPassword());
-			user.setPassword(hashedPass);
+
+			user.setPassword(user.getPassword());
 			user.setEnabled(true);
 			
 			AuthorityId authId = new AuthorityId(user.getEmail(), ROLE_USER);			

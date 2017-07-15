@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ba.sec.app.constants.Constants;
+import ba.sec.app.dto.LinkResult;
+import ba.sec.app.dto.TagResult;
 import ba.sec.app.secApp.dao.LinkHome;
 import ba.sec.app.secApp.dao.UserHome;
 import ba.sec.app.secApp.modelx.Link;
 import ba.sec.app.secApp.modelx.User;
-import ba.sec.app.secApp.rest.Constants;
-import ba.sec.app.secApp.rest.LinkResult;
-import ba.sec.app.secApp.rest.TagResult;
 
 @Service("linkService")
 @Transactional
@@ -100,6 +100,21 @@ public class LinkService implements ILinkService {
 		}
 
 		return result;
+	}
+
+	@Override
+	public List<String> getUserLinks(String url2, String email) {
+
+		User user = userDao.findByEmail(email);
+
+		if (user == null) {
+			return null;
+		}
+
+		List<String> urls = linkDao.getLinksSimilarToURL2(url2,user.getId());
+
+		
+		return urls;
 	}
 
 }

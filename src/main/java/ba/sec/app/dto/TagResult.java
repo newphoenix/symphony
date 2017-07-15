@@ -1,4 +1,4 @@
-package ba.sec.app.secApp.rest;
+package ba.sec.app.dto;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,17 +12,11 @@ public class TagResult implements Serializable{
 	
 	public TagResult(){}
 	
-	
-	
-
 	public TagResult(String msg, List<String> tags) {
 		super();
 		this.msg = msg;
 		this.tags = tags;
 	}
-
-
-
 
 	public String getMsg() {
 		return msg;

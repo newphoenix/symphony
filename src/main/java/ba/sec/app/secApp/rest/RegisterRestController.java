@@ -13,18 +13,15 @@ import ba.sec.app.secApp.service.IUserService;
 
 @RestController
 @RequestMapping("register")
-public class RegisterRestController extends BasicService{
+public class RegisterRestController{
 	
 	@Resource(name="userService")
 	IUserService userService;
 
 	@PostMapping(value="/save",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String saveUser(@RequestBody User user) {
-
-        System.out.println("-- "+user);
         
-        String result = userService.register(user);
-        
+        String result = userService.register(user);        
         return result;
 	}
 
