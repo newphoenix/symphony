@@ -17,6 +17,8 @@ symphony.is what is called symphony challenge
 3. System should handle www.example.com/?a=foo&b=bar same as www.example.com/?b=bar&a=foo
 4. if link exists then return tag as suggestion.
 
+In application.properties change Database username,password and host ip address
+
 # Used spring boot + mySql.
 
 # main class is SecAppApplication
