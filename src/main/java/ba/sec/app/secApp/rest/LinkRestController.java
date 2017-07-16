@@ -4,10 +4,11 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ba.sec.app.constants.Constants;
+import ba.sec.app.dto.ErrorMsg;
 import ba.sec.app.dto.LinkResult;
 import ba.sec.app.dto.TagResult;
 import ba.sec.app.secApp.modelx.Link;
 import ba.sec.app.secApp.service.ILinkService;
-import ba.sec.app.urlUtils.LinkUtils;
+import ba.sec.app.utils.LinkUtils;
+import ba.sec.app.utils.ValidationMessageUtils;
 
 @RestController
 @RequestMapping("link")
@@ -30,7 +33,14 @@ public class LinkRestController {
 	ILinkService linkService;
 
 	@PostMapping(value="/save",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> saveUrl(@RequestBody Link link,Principal princ) {
+	public ResponseEntity<?> saveUrl(@RequestBody @Valid  Link link, Errors errors,Principal princ) {
+		
+		System.out.println(link);
+		
+		 if (errors.hasErrors()) {	    	
+		    	ErrorMsg errorMsg = ValidationMessageUtils.buildMessage(errors);
+	            return ResponseEntity.ok(errorMsg);
+		        }
 		
 		String url = link.getLink();
 		int andNumber = LinkUtils.countChars(url, Constants.AND);
@@ -41,14 +51,14 @@ public class LinkRestController {
 
 		List<String> userLinks = linkService.getUserLinks(url2,princ.getName());
 		
-		String result = Constants.LINK_EXIST;
-		HttpStatus httpStatus = HttpStatus.OK; 
+		LinkResult result = new LinkResult();
+		result.setMsg(Constants.LINK_EXIST);
 		
        if(!LinkUtils.checkLinkExist(userLinks,andNumber,paramLst1,url))	{	
-          result = linkService.addLink(link,princ.getName());         
+    	   result.setMsg(linkService.addLink(link,princ.getName()));            
        }
-        
-        return ResponseEntity.status(httpStatus).body(result);
+       
+        return ResponseEntity.ok(result);
 	}
 	
 	@GetMapping(value="/getAll",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)

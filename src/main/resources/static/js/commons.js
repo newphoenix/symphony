@@ -24,7 +24,7 @@ function addLink(){
         data : JSON.stringify(formData),
         success : function(data) {
         	$("#error").empty().hide();	
-			if(data.result == 'ok'){
+			if(data.msg == 'ok'){
 				
 				
 				var link = $("#link").val();
@@ -35,7 +35,9 @@ function addLink(){
 				
 				appendToLinkTable(link,tag);
 				
-			}else if(data.result == "exists"){
+			}else if(data.msg == "nok"){
+				displayError(data.result);
+			}else if(data.msg == "exists"){
 				displayError("Link already exists");
 			}else{
 				displayError("Didn't add link");

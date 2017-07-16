@@ -1,4 +1,4 @@
-package ba.sec.app.urlUtils;
+package ba.sec.app.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,15 +57,15 @@ public class LinkUtils {
 
 		boolean result = false;
 		
-		for (int i = 0; i < list.size(); i++) {
-			String s1 = list.get(i).replace(Constants.HTTP, Constants.EMPTY);
+		for (String userLink : list) {
+			String s1 = userLink.replace(Constants.HTTP, Constants.EMPTY);
 			
 			if(s1.equals(url)){
 				result = true;
 				break;
 			}
 			
-			int andNumerInUrl = countChars(list.get(i), Constants.AND);
+			int andNumerInUrl = countChars(userLink, Constants.AND);
 
 			if (andNumber == andNumerInUrl) {
 				String param = paramsInUrl(s1);

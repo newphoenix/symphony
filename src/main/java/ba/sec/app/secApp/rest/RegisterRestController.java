@@ -1,7 +1,5 @@
 package ba.sec.app.secApp.rest;
 
-import java.util.stream.Collectors;
-
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
@@ -13,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ba.sec.app.constants.Constants;
+import ba.sec.app.dto.ErrorMsg;
 import ba.sec.app.dto.RegisterResult;
 import ba.sec.app.secApp.modelx.User;
 import ba.sec.app.secApp.service.IUserService;
+import ba.sec.app.utils.ValidationMessageUtils;
 
 @RestController
 @RequestMapping("register")
@@ -29,17 +28,9 @@ public class RegisterRestController{
 	public ResponseEntity<?> saveUser(@RequestBody @Valid User user, Errors errors) {
 		RegisterResult result = new RegisterResult();
 		
-	    if (errors.hasErrors()) {
-	    	
-	    	
-	            result.setResult(errors.getAllErrors()
-	            		 .stream().map(x -> x.getDefaultMessage()+"<br>")
-	                        .collect(Collectors.toList()));
-	            
-	            result.setMsg(Constants.NOK_);
-
-	            return ResponseEntity.ok(result);
-
+	    if (errors.hasErrors()) {	    	
+	    	ErrorMsg errorMsg = ValidationMessageUtils.buildMessage(errors);
+            return ResponseEntity.ok(errorMsg);
 	        }
         
         String register = userService.register(user); 
