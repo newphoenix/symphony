@@ -3,11 +3,11 @@ symphony.is what is called symphony challenge
 
 # Create web application that has: 
 
-1. login /register  10 points
-2. add links with tags  10 points
-3. handle same links  18 points
-4. suggestion 22 points
-5. ??? 40 points let it be a surprise (not included in the code).
+1. login /register  (10 points)
+2. add links with tags  (10 points)
+3. handle same links  (18 points)
+4. suggestion (22 points)
+5. ??? (40 points) let it be a surprise (not included in the code).
 
 
 # A little bit of details
