@@ -6,4 +6,4 @@
 
 mvn clean install
 
-SecAppApplication is the main entrypoint
+SecAppApplication is the main entrypoint.
